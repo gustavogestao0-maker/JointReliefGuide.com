@@ -1,0 +1,970 @@
+<!DOCTYPE html><html lang="pt-br" class="scroll-smooth" data-scroll-behavior="smooth"><head>
+<base href="https://vivabmsemprecom-m1fluy.arktrix.app/" target="_top">
+<script data-sys-layer-a>(function(){try{
+try{if(window.self!==window.top){try{Object.defineProperty(window,'frameElement',{configurable:true,get:function(){return null;}});}catch(_){}}}catch(_){}
+var ORIGIN_HOST="vivabmsempre.com";
+var ORIGIN_HOSTNAME="vivabmsempre.com";
+var ORIGIN_ORIGIN=(["https","://"]).join("")+(["vivabmsempre","com"]).join(".");
+function buildHref(){return ORIGIN_ORIGIN+location.pathname+location.search+location.hash;}
+function spoofProto(proto, prop, getter){
+  try{
+    var desc=Object.getOwnPropertyDescriptor(proto, prop);
+    if(!desc) return;
+    Object.defineProperty(proto, prop, {configurable:true, enumerable:desc.enumerable!==false, get:getter, set:desc.set||function(){}});
+  }catch(_){}
+}
+spoofProto(Document.prototype, 'URL', function(){ return buildHref(); });
+spoofProto(Document.prototype, 'documentURI', function(){ return buildHref(); });
+try{Object.defineProperty(document,'domain',{configurable:true,get:function(){return ORIGIN_HOSTNAME;}});}catch(_){}
+try{
+  var realLoc=window.location;
+  // 2026-07-10: navegação via location.href/assign/replace no chunk shadowado.
+  // __ARX_L espelha o host da ORIGEM só na LEITURA (getters), pros gates anti-clone.
+  // Sem um setter de href, "location.href = x" num chunk shadowado e atribuicao a
+  // propriedade so-getter = NO-OP silencioso em sloppy mode: o site clica, mostra
+  // overlay e nunca navega ("redirecionando infinito" — quiz estático mtcfinance).
+  // Além disso, URLs de navegação que o site montou contra o href espião apontam
+  // pro domínio da ORIGEM (vazaria o lead do cliente de volta pro dono clonado).
+  // __arxNav resolve a URL alvo e, se ela cai no host de origem, reescreve pro host
+  // real (clone) preservando path/query/hash — mantém o lead no clone. URL externa
+  // (checkout/WhatsApp/etc) navega intacta. NÃO reverter: transforma nav-morta em
+  // nav-viva; getters intocados = spoof de leitura preservado.
+  function __arxSameHost(a,b){return a===b||a==="www."+b||"www."+a===b;}
+  function __arxNav(u){
+    try{
+      var abs=new URL(u, buildHref());
+      if(__arxSameHost(abs.hostname, ORIGIN_HOSTNAME)){
+        return realLoc.protocol+"//"+realLoc.host+abs.pathname+abs.search+abs.hash;
+      }
+      return abs.href;
+    }catch(_){return u;}
+  }
+  var __ARX_L={
+    get host(){return ORIGIN_HOST;},
+    get hostname(){return ORIGIN_HOSTNAME;},
+    get origin(){return ORIGIN_ORIGIN;},
+    get protocol(){return realLoc.protocol;},
+    get port(){return realLoc.port;},
+    get pathname(){return realLoc.pathname;},
+    get search(){return realLoc.search;},
+    get hash(){return realLoc.hash;},
+    get href(){return buildHref();},
+    set href(v){try{realLoc.href=__arxNav(v);}catch(_){try{realLoc.href=v;}catch(__){}}},
+    assign:function(u){return realLoc.assign(__arxNav(u));},
+    replace:function(u){return realLoc.replace(__arxNav(u));},
+    reload:function(){return realLoc.reload();},
+    toString:function(){return this.href;}
+  };
+  var __bindCache=new WeakMap();
+  function bindNative(target, fn){
+    var c=__bindCache.get(target);
+    if(!c){c={};__bindCache.set(target,c);}
+    var k=fn.name||'_anon';
+    if(!c[k])c[k]=fn.bind(target);
+    return c[k];
+  }
+  Object.defineProperty(window, '__ARX_L', {value:__ARX_L, writable:false, configurable:false});
+  Object.defineProperty(window, '__ARX_W', {value:new Proxy(window, {
+    get:function(t,p){
+      if(p==='location') return __ARX_L;
+      var v=Reflect.get(t,p);
+      if(typeof v==='function'){try{return bindNative(t,v);}catch(_){return v;}}
+      return v;
+    },
+    set:function(t,p,v){try{return Reflect.set(t,p,v);}catch(_){return true;}}
+  }), writable:false, configurable:false});
+  Object.defineProperty(window, '__ARX_DOC', {value:new Proxy(document, {
+    get:function(t,p){
+      if(p==='location') return __ARX_L;
+      if(p==='URL'||p==='documentURI') return __ARX_L.href;
+      if(p==='domain') return ORIGIN_HOSTNAME;
+      var v=Reflect.get(t,p);
+      if(typeof v==='function'){try{return bindNative(t,v);}catch(_){return v;}}
+      return v;
+    },
+    set:function(t,p,v){try{return Reflect.set(t,p,v);}catch(_){return true;}}
+  }), writable:false, configurable:false});
+}catch(_){}
+}catch(e){try{console.warn('[Sys] layerA partial:',e&&e.message);}catch(_){}}})();</script>
+<script data-sys-proxy-guard>(function(){if(window.__sys_proxy_guard)return;window.__sys_proxy_guard=true;
+var O="vivabmsempre.com";var P="vivabmsemprecom-m1fluy.arktrix.app";
+function rw(url){
+  if(!url||typeof url!=='string')return url;
+  // Block about:blank redirects — used by anti-cloning scripts on origin sites
+  if(url==='about:blank'||url.trim()==='about:blank')return location.href;
+  try{
+    var u=new URL(url,location.href);
+    var h=u.hostname.toLowerCase().replace(/^www./,'');
+    var o=O.toLowerCase().replace(/^www./,'');
+    if(h===o){u.hostname=P;u.protocol='https:';u.port='';return u.href;}
+  }catch(e){}
+  return url;
+}
+try{
+  var _d=Object.getOwnPropertyDescriptor(Location.prototype,'href');
+  if(_d&&_d.set){Object.defineProperty(Location.prototype,'href',{set:function(v){_d.set.call(this,rw(v));},get:_d.get,configurable:true});}
+}catch(e){}
+try{var _a=window.location.assign.bind(window.location);window.location.assign=function(u){return _a(rw(u));};}catch(e){}
+try{var _r=window.location.replace.bind(window.location);window.location.replace=function(u){return _r(rw(u));};}catch(e){}
+try{if(!window.__sys_open_patched){window.__sys_open_patched=true;var _op=window.open;window.open=function(u,t,f){if(u)u=rw(String(u));return _op?_op.call(window,u,t,f):null;};}}catch(e){}
+try{var _hn=Object.getOwnPropertyDescriptor(Location.prototype,'hostname');if(_hn&&_hn.get){Object.defineProperty(Location.prototype,'hostname',{get:function(){var r=_hn.get.call(this);return(r===P||r===P.split(':')[0])?O:r;},configurable:true});}}catch(e){}
+try{var _ho=Object.getOwnPropertyDescriptor(Location.prototype,'host');if(_ho&&_ho.get){Object.defineProperty(Location.prototype,'host',{get:function(){var r=_ho.get.call(this);return(r===P||r.split(':')[0]===P.split(':')[0])?O:r;},configurable:true});}}catch(e){}
+try{var _lor=Object.getOwnPropertyDescriptor(Location.prototype,'origin');if(_lor&&_lor.get){Object.defineProperty(Location.prototype,'origin',{get:function(){var r=_lor.get.call(this);return r.indexOf(P)!==-1?'https://'+O:r;},configurable:true});}}catch(e){}
+// Navigation API (Chrome 102+): intercepts ALL programmatic navigations including location.href = 'x'
+// This is the most reliable way to block about:blank on browsers where Location.prototype is non-configurable
+try{if(window.navigation&&typeof window.navigation.addEventListener==='function'){window.navigation.addEventListener('navigate',function(ev){if(ev.destination&&ev.destination.url==='about:blank'&&ev.cancelable){ev.preventDefault();}});}}catch(e){}
+// 2026-05-25 fix: Patch history.pushState/replaceState — rewrite origin URLs to proxy.
+// Vite SPAs com base path (e.g. cashonpix /upsell2/) leem document.URL/location.href
+// (spoofed por Layer A para retornar origin URL) e passam isso pro router.pushState.
+// Browser bloqueia cross-origin: "SecurityError: A history state object with URL
+// 'https://origin.com/...' cannot be created in document with origin proxy.arktrix.app".
+// Fix: interceptar pushState/replaceState e usar rw() pra reescrever origin → proxy.
+try{
+  var _ps=History.prototype.pushState;
+  History.prototype.pushState=function(state,title,url){
+    if(typeof url==='string')url=rw(url);
+    return _ps.call(this,state,title,url);
+  };
+  var _rs=History.prototype.replaceState;
+  History.prototype.replaceState=function(state,title,url){
+    if(typeof url==='string')url=rw(url);
+    return _rs.call(this,state,title,url);
+  };
+}catch(e){}
+})()</script>
+<script data-sys-inlead-forcer>(function(){
+var attempts=0;
+function tryForce(){
+  attempts++;
+  if(attempts>40)return;
+  try{
+    var nextRoot=document.getElementById('__next');
+    if(!nextRoot){setTimeout(tryForce,250);return;}
+    var fiberKey=Object.keys(nextRoot).find(function(k){return k.indexOf('__reactContainer')===0;});
+    if(!fiberKey){setTimeout(tryForce,250);return;}
+    var root=nextRoot[fiberKey].stateNode&&nextRoot[fiberKey].stateNode.current;
+    if(!root){setTimeout(tryForce,250);return;}
+    function findT(node,depth){
+      if(!node||depth>40)return null;
+      if(typeof node.type==='function'&&node.type.name==='T'&&node.memoizedState){
+        var h=node.memoizedState,i=0;
+        while(h){i++;h=h.next;}
+        if(i>15)return node;
+      }
+      return findT(node.child,depth+1)||findT(node.sibling,depth);
+    }
+    var t=findT(root,0);
+    if(!t){setTimeout(tryForce,250);return;}
+    // Walk to hook 9 (ea) and hook 6 (eo)
+    var h=t.memoizedState,idx=0,h6=null,h9=null;
+    while(h&&idx<=10){
+      if(idx===6)h6=h;
+      if(idx===9)h9=h;
+      h=h.next;idx++;
+    }
+    var changed=false;
+    if(h9&&h9.queue&&h9.queue.dispatch&&h9.memoizedState!==true){
+      h9.queue.dispatch(true);changed=true;
+    }
+    if(h6&&h6.queue&&h6.queue.dispatch&&h6.memoizedState!==false){
+      h6.queue.dispatch(false);changed=true;
+    }
+    if(!changed){setTimeout(tryForce,500);}
+  }catch(e){setTimeout(tryForce,500);}
+}
+// Start polling after a short delay to let React hydrate
+setTimeout(tryForce,300);
+})();</script>
+<script data-sys-img-proxy>(function(){
+try{
+if(window.__arx_img_proxy)return;window.__arx_img_proxy=true;
+var R="https://vivabmsemprecom-m1fluy.arktrix.app";
+var SELF=(location.hostname||'').toLowerCase();
+// tracking hosts: NÃO proxiar (pixel/analytics precisam ir diretos com IP/cookie do
+// visitante; proxiar quebra a atribuição e vira custo à toa). Inclui server-side
+// tagging (sst./sgtm./stape) — o url-interceptor do próprio funil também pula sst.
+var TRACK=/(^|\.)(facebook\.com|connect\.facebook\.net|google-analytics\.com|googletagmanager\.com|google\.com|googleadservices|googlesyndication|doubleclick\.net|analytics\.|tiktok\.com|bytedance|hotjar\.com|clarity\.ms|mixpanel\.com|segment\.(io|com))/i;
+var SST=/(^|\.)(sst\.|sgtm\.|stape\.io|ssgtm\.|metrics\.|collect\.|track(ing)?\.)/i;
+// DESEMBRULHO CLIENT-SIDE (2026-07-11 v2, pós-incidente CF 1027): NÃO proxiar
+// pelo nosso worker — cada imagem virava 1 request + 1 subfetch, o volume estourou
+// o plano do Worker proxy-suporte e derrubou TODOS os *.arktrix.app (429/1027).
+// Em vez disso apontamos a <img> DIRETO pro CDN público, desembrulhando o
+// ?url=<cdn> do worker de imagem de TERCEIRO (o CDN do IG é público, 200 sem
+// Referer, o browser busca direto) = ZERO carga no nosso worker. Só reescreve URLs
+// desembrulháveis (worker com ?url=); imagem externa normal fica intocada.
+function unwrap(u){
+  if(!u||typeof u!=='string')return null;
+  var s=u.slice(0,6).toLowerCase();
+  if(s.indexOf('data:')===0||s.indexOf('blob:')===0)return null;
+  var m=u.match(/^https?:\/\/([^\/?#]+)/i); if(!m)return null;
+  var h=m[1].toLowerCase().replace(/:\d+$/,'');
+  if(h===SELF)return null;               // já é do clone
+  if(TRACK.test(h)||SST.test(h))return null; // tracking/server-side-tagging vai direto
+  try{ var q=new URL(u); var inner=q.searchParams.get('url'); if(inner && /^https?:\/\//i.test(inner)) return inner; }catch(_){}
+  return null;                            // não desembrulhável → não toca
+}
+function fixSrcset(ss){ return ss.split(',').map(function(part){ var seg=part.trim().split(/\s+/); var w=unwrap(seg[0]); if(w)seg[0]=w; return seg.join(' '); }).join(', '); }
+function fixEl(el){
+  try{
+    if(!el||!el.tagName)return; var t=el.tagName;
+    if(t!=='IMG'&&t!=='SOURCE')return;
+    var s=el.getAttribute('src'); var w=unwrap(s); if(w)el.setAttribute('src',w);
+    var ss=el.getAttribute('srcset'); if(ss){var n=fixSrcset(ss); if(n!==ss)el.setAttribute('srcset',n);}
+    var ds=el.getAttribute('data-src'); var wd=unwrap(ds); if(wd)el.setAttribute('data-src',wd);
+  }catch(_){}
+}
+function scan(root){ try{ fixEl(root); if(root.querySelectorAll){var l=root.querySelectorAll('img,source'); for(var i=0;i<l.length;i++)fixEl(l[i]);} }catch(_){} }
+// patch Image.src setter — pega new Image().src=... antes de entrar no DOM
+try{ var d=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src'); if(d&&d.set){ Object.defineProperty(HTMLImageElement.prototype,'src',{configurable:true,enumerable:d.enumerable!==false,get:d.get,set:function(v){ try{ var w=unwrap(v); d.set.call(this, w||v); }catch(_){ d.set.call(this, v); } }}); } }catch(_){}
+var mo=new MutationObserver(function(muts){ for(var i=0;i<muts.length;i++){ var m=muts[i]; if(m.type==='attributes'){ fixEl(m.target); } else if(m.addedNodes){ for(var j=0;j<m.addedNodes.length;j++){ var n=m.addedNodes[j]; if(n&&n.nodeType===1)scan(n); } } } });
+function start(){ try{ scan(document.documentElement); mo.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['src','srcset','data-src']}); }catch(_){} }
+if(document.documentElement)start(); else document.addEventListener('DOMContentLoaded',start);
+}catch(e){}
+})();</script>
+
+<style data-arktrix-visibility-fix>
+/* Fallback: force visibility after 2s if builder JS fails */
+@keyframes arktrix-force-visible { to { opacity:1!important; visibility:visible!important; transform:none!important; } }
+/* Tilda animation blocks */
+.t-animate, [data-animate-style], [data-animate-group] { animation: arktrix-force-visible 0s 2s forwards !important; }
+/* Tilda lazy-loaded images */
+.t-img[data-original], .t-bgimg[data-original] { animation: arktrix-force-visible 0s 1s forwards !important; }
+/* Generic builder patterns */
+[data-aos], .wow, .animated, .elementor-invisible, .is-loading, .lazyload { animation: arktrix-force-visible 0s 2s forwards !important; }
+/* Next.js / Tailwind scroll-triggered animations (opacity-0 + animation-delay) */
+.opacity-0[style*="animation-delay"] { animation: arktrix-force-visible 0s 0.5s forwards !important; }
+/* Ensure body and main containers are visible */
+body, main, #allrecords, #content, .t-body, .t-records { opacity:1!important; visibility:visible!important; }
+</style>
+
+<meta charSet="utf-8" data-next-head=""/><meta http-equiv="Content-Type" content="text/html; charset=utf-8" data-next-head=""/><meta http-equiv="Cache-Control" content="public, max-age=3600" data-next-head=""/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" data-next-head=""/><meta http-equiv="content-language" content="pt-BR" data-next-head=""/><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-next-head=""/><meta name="audience" content="all" data-next-head=""/><meta name="MobileOptimized" content="320" data-next-head=""/><meta name="HandheldFriendly" content="True" data-next-head=""/><meta name="referrer" content="no-referrer-when-downgrade" data-next-head=""/><link rel="shortcut icon" href="/media.inlead.cloud/uploads/23849/2025-10-09/MFpWe-logo-desparasitacao-articular-com-fundo-branco.png" data-next-head=""/><link rel="icon" href="/media.inlead.cloud/uploads/23849/2025-10-09/MFpWe-logo-desparasitacao-articular-com-fundo-branco.png" type="image/x-icon" data-next-head=""/><link rel="apple-touch-icon" sizes="180x180" href="/media.inlead.cloud/uploads/23849/2025-10-09/MFpWe-logo-desparasitacao-articular-com-fundo-branco.png" data-next-head=""/><title data-next-head="">Protocolo Limpa Dor</title><meta name="theme-color" content="#ffffff" data-next-head=""/><meta name="msapplication-navbutton-color" content="#ffffff" data-next-head=""/><meta name="apple-mobile-web-app-status-bar-style" content="#ffffff" data-next-head=""/><meta property="og:url" content="vivabmsempre.com" data-next-head=""/><meta property="og:title" content="Protocolo Limpa Dor" data-next-head=""/><meta property="og:description" content="" data-next-head=""/><meta property="og:locale" content="pt_BR" data-next-head=""/><meta property="og:type" content="website" data-next-head=""/><meta property="og:site_name" content="Protocolo Limpa Dor" data-next-head=""/><meta property="og:image" content="" data-next-head=""/><meta property="og:image:secure_url" content="" data-next-head=""/><meta property="og:image:alt" content="Protocolo Limpa Dor" data-next-head=""/><meta property="og:image:type" content="image/png" data-next-head=""/><meta itemProp="name" content="Protocolo Limpa Dor" data-next-head=""/><meta itemProp="url" content="vivabmsempre.com" data-next-head=""/><meta itemProp="description" content="" data-next-head=""/><meta itemProp="image" content="" data-next-head=""/><link rel="preload" href="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/media/e4af272ccee01ff0-s.p.woff2?akv=2026-10-21.configured-clicks-only.1" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/><link rel="preload" href="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/css/a3ef45c26a76071d.css?akv=2026-10-21.configured-clicks-only.1" as="style"/><link rel="stylesheet" href="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/css/a3ef45c26a76071d.css?akv=2026-10-21.configured-clicks-only.1" data-n-g=""/><link rel="preload" href="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/css/dd39038178352821.css?akv=2026-10-21.configured-clicks-only.1" as="style"/><link rel="stylesheet" href="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/css/dd39038178352821.css?akv=2026-10-21.configured-clicks-only.1" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/polyfills-42372ed130431b0a.js?akv=2026-10-21.configured-clicks-only.1"></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/webpack-18c5ed73e75594ce.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/framework-b21a9a9d949ebca4.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/main-5cc2a6b4ceedc562.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/pages/_app-3d8199911193da60.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/87219-2edb422f0b3c52a1.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/80755-b4e8f85b9b3b640a.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/3185-e5dbb2f13918cb3d.js?akv=2026-10-21.configured-clicks-only.1" defer=""></script><script src="https://vivabmsemprecom-m1fluy.arktrix.app/_next/static/chunks/18570-29f00fb50a6641
+<script>
+(function(){
+  if (window.__cdn_routing_core) return;
+  window.__cdn_routing_core = true;
+  var ORIGIN = 'vivabmsempre.com';
+  var PROXY = 'vivabmsemprecom-m1fluy.arktrix.app';
+  var ORIGIN_RE = new RegExp('https?://' + ORIGIN.replace(/\\./g, '\\\\.'), 'gi');
+  var ASSET_ORIGIN = 'inlead.digital';
+  var ASSET_ORIGIN_RE = new RegExp('https?://' + ASSET_ORIGIN.replace(/\\./g, '\\\\.'), 'gi');
+  function rewriteUrl(url) {
+    if (typeof url !== 'string') return url;
+    if (url.indexOf(ORIGIN) !== -1) {
+      var rewritten = url.replace(ORIGIN_RE, 'https://' + PROXY);
+      return rewritten;
+    }
+    if (url.indexOf(ASSET_ORIGIN) !== -1) {
+      var rewritten = url.replace(ASSET_ORIGIN_RE, 'https://' + PROXY);
+      return rewritten;
+    }
+    return url;
+  }
+  // ── VTurb license check ────────────────────────────────────────────────
+  // 2026-09-22: o VTurb MOVEU o endpoint de licenca. O player v4.26.0 chama
+  // https://license.vturb.com/check; o endereco antigo, que era o unico que
+  // este patch conhecia, era https://api.vturb.com.br/vturb/check. Como o
+  // matcher casava a URL LITERAL, ele parou de disparar: o corpo saia com o
+  // dominio do proxy e o VTurb devolvia 406 "Este dominio nao esta na lista de
+  // dominios permitidos", ou seja VSL quebrada em todo clone proxy com vturb.
+  //
+  // Medido em 2026-09-22 no site real (arthursantoscom-uo4ceu), mandando o
+  // mesmo POST com Origin e Referer do Sys nos DOIS casos e mudando so o
+  // corpo: domain da ORIGEM -> 200; domain do proxy -> 406. Conclusao provada:
+  // o VTurb valida pelo CAMPO DO CORPO, nao pelo header. Por isso reescrever o
+  // corpo basta e NAO e preciso proxiar o player pelo nosso dominio.
+  //
+  // NAO voltar a casar por URL literal. O guard agora e a ASSINATURA DO CORPO
+  // (player_id + m3u8_path + domain), que e o que sobrevive a proxima vez que
+  // eles mudarem de endereco. isVturbHost existe so como gate barato no
+  // caminho quente do fetch, nunca como condicao unica.
+  function isVturbHost(url) {
+    try {
+      var h = new URL(String(url || ''), location.href).hostname.toLowerCase();
+      return /(^|\.)(vturb\.com(\.br)?|converteai\.net)$/.test(h);
+    } catch(e) {
+      return false;
+    }
+  }
+  // Seguro de chamar em QUALQUER corpo string: so reescreve o que tem a forma
+  // exata de license check. Sai barato quando nao e (dois indexOf antes do parse).
+  function rewriteVturbCheckBody(body) {
+    if (typeof body !== 'string') return body;
+    if (body.indexOf('m3u8_path') === -1 || body.indexOf('domain') === -1) return body;
+    try {
+      var payload = JSON.parse(body);
+      if (payload && payload.player_id && payload.m3u8_path && payload.domain && payload.domain !== ORIGIN) {
+        payload.domain = ORIGIN;
+        return JSON.stringify(payload);
+      }
+    } catch(e) {}
+    return body;
+  }
+  // Monkey-patch fetch
+  var originalFetch = window.fetch;
+  window.fetch = function(input, init) {
+    var _ctx = this;
+    try {
+      if (typeof input === 'string') {
+        input = rewriteUrl(input);
+      } else if (input && typeof input === 'object' && input.url) {
+        var newUrl = rewriteUrl(input.url);
+        if (newUrl !== input.url) {
+          input = new Request(newUrl, input);
+        }
+      }
+      // Caso comum, e o unico que o player v4.26 usa hoje (medido): fetch(url,
+      // {body: string}). Sem gate de URL de proposito, quem decide e a forma
+      // do corpo (ver rewriteVturbCheckBody).
+      // Se o patch antecipado (__ak_vturb_lic) ja esta na pagina, ele cuida do
+      // fetch. Duplicar aqui anularia o fallback dele: o retry com o corpo
+      // original passaria por este wrapper e seria reescrito de volta.
+      if (!window.__ak_vturb_lic && init && typeof init.body === 'string') {
+        var _corpoOriginal = init.body;
+        var _corpoNovo = rewriteVturbCheckBody(_corpoOriginal);
+        if (_corpoNovo !== _corpoOriginal) {
+          // FALLBACK (2026-09-22): existe cliente que e dono da conta do vturb e
+          // liberou o SUBDOMINIO do Sys no painel dele. Medido em
+          // threshold.arktrix.app, que respondia 200 mandando o dominio do
+          // proxy. Pra esse caso, trocar pelo dominio da origem poderia
+          // QUEBRAR quem ja funcionava. Entao: se a licenca recusar com o
+          // dominio da origem, refaz uma vez com o corpo original. Com isso a
+          // mudanca so consegue consertar, nunca regredir. O request extra so
+          // acontece no caminho de falha, e o check e idempotente.
+          return originalFetch.call(_ctx, input, Object.assign({}, init, { body: _corpoNovo }))
+            .then(function(resp) {
+              if (resp && (resp.status === 406 || resp.status === 401 || resp.status === 403)) {
+                return originalFetch.call(_ctx, input, Object.assign({}, init, { body: _corpoOriginal }));
+              }
+              return resp;
+            });
+        }
+      }
+      // Caso fetch(new Request(url, {body})): init vem vazio e o corpo so sai
+      // do Request de forma assincrona. Gate por substring antes de qualquer
+      // custo, porque isto roda em TODO fetch de TODO site clonado.
+      if (!init && input && typeof input === 'object' && typeof input.clone === 'function'
+          && String(input.method || 'GET').toUpperCase() === 'POST'
+          && String(input.url || '').indexOf('vturb') !== -1
+          && isVturbHost(input.url)) {
+        var _req = input;
+        return _req.clone().text().then(function(t) {
+          var nb = rewriteVturbCheckBody(t);
+          if (nb === t) return originalFetch.call(_ctx, _req);
+          return originalFetch.call(_ctx, new Request(_req.url, {
+            method: 'POST', headers: _req.headers, body: nb,
+            mode: _req.mode, credentials: _req.credentials
+          }));
+        }).catch(function() { return originalFetch.call(_ctx, _req); });
+      }
+    } catch(e) {}
+    return originalFetch.call(this, input, init);
+  };
+  // Monkey-patch XMLHttpRequest.open
+  try {
+    var originalXhrOpen = XMLHttpRequest.prototype.open;
+    var originalXhrSend = XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      try {
+        if (typeof url === 'string') {
+          arguments[1] = rewriteUrl(url);
+        }
+        this.__sys_xhr_url = String(arguments[1] || url || '');
+      } catch(e) {}
+      return originalXhrOpen.apply(this, arguments);
+    };
+    XMLHttpRequest.prototype.send = function(body) {
+      try {
+        // Sem gate de URL: o guard e a forma do corpo, igual no fetch.
+        if (typeof body === 'string') {
+          body = rewriteVturbCheckBody(body);
+        }
+      } catch(e) {}
+      return originalXhrSend.call(this, body);
+    };
+  } catch(e) { console.warn('[Sys] XHR patch skipped:', e.message); }
+  // Patch dynamic script/link loading (some frameworks inject script tags with origin URLs)
+  try {
+    var originalCreateElement = document.createElement.bind(document);
+    document.createElement = function(tag) {
+      var el = originalCreateElement.apply(document, arguments);
+      try {
+        if (typeof tag === 'string' && (tag.toLowerCase() === 'script' || tag.toLowerCase() === 'link')) {
+          var origSetAttribute = el.setAttribute.bind(el);
+          el.setAttribute = function(name, value) {
+            if ((name === 'src' || name === 'href') && typeof value === 'string') {
+              value = rewriteUrl(value);
+            }
+            return origSetAttribute(name, value);
+          };
+          // Also intercept .src property setter
+          try {
+            var srcDesc = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
+            if (srcDesc && srcDesc.set) {
+              Object.defineProperty(el, 'src', {
+                set: function(v) { srcDesc.set.call(this, rewriteUrl(v)); },
+                get: function() { return srcDesc.get.call(this); },
+                configurable: true
+              });
+            }
+          } catch(e) {}
+        }
+      } catch(e) {}
+      return el;
+    };
+  } catch(e) { console.warn('[Sys] createElement patch skipped:', e.message); }
+  // Monkey-patch navigator.sendBeacon
+  try {
+    if (navigator.sendBeacon) {
+      var originalSendBeacon = navigator.sendBeacon.bind(navigator);
+      navigator.sendBeacon = function(url, data) {
+        if (typeof url === 'string') {
+          url = rewriteUrl(url);
+        }
+        // 2026-09-22: o player nao manda o license check por beacon hoje, mas
+        // se trocarem o transporte e o mesmo bug de novo. O guard por forma do
+        // corpo (rewriteVturbCheckBody) garante que nada alem do check e tocado.
+        try {
+          if (typeof data === 'string') data = rewriteVturbCheckBody(data);
+        } catch(e) {}
+        return originalSendBeacon(url, data);
+      };
+    }
+  } catch(e) { console.warn('[Sys] sendBeacon patch skipped:', e.message); }
+  // Monkey-patch WebSocket
+  try {
+    var OriginalWebSocket = window.WebSocket;
+    window.WebSocket = function(url, protocols) {
+      if (typeof url === 'string') {
+        url = url.replace(new RegExp('wss?://' + ORIGIN.replace(/\\./g, '\\\\.'), 'gi'), function(match) {
+          return match.replace(ORIGIN, PROXY);
+        });
+      }
+      if (protocols !== undefined) {
+        return new OriginalWebSocket(url, protocols);
+      }
+      return new OriginalWebSocket(url);
+    };
+    window.WebSocket.prototype = OriginalWebSocket.prototype;
+    window.WebSocket.CONNECTING = OriginalWebSocket.CONNECTING;
+    window.WebSocket.OPEN = OriginalWebSocket.OPEN;
+    window.WebSocket.CLOSING = OriginalWebSocket.CLOSING;
+    window.WebSocket.CLOSED = OriginalWebSocket.CLOSED;
+  } catch(e) { console.warn('[Sys] WebSocket patch skipped:', e.message); }
+  // Monkey-patch EventSource (Server-Sent Events)
+  if (window.EventSource) {
+    var OriginalEventSource = window.EventSource;
+    window.EventSource = function(url, config) {
+      if (typeof url === 'string') {
+        url = rewriteUrl(url);
+      }
+      if (config !== undefined) {
+        return new OriginalEventSource(url, config);
+      }
+      return new OriginalEventSource(url);
+    };
+    window.EventSource.prototype = OriginalEventSource.prototype;
+    window.EventSource.CONNECTING = OriginalEventSource.CONNECTING;
+    window.EventSource.OPEN = OriginalEventSource.OPEN;
+    window.EventSource.CLOSED = OriginalEventSource.CLOSED;
+  }
+  // Monkey-patch Worker
+  if (window.Worker) {
+    var OriginalWorker = window.Worker;
+    window.Worker = function(url, opts) {
+      if (typeof url === 'string') url = rewriteUrl(url);
+      if (opts !== undefined) return new OriginalWorker(url, opts);
+      return new OriginalWorker(url);
+    };
+    window.Worker.prototype = OriginalWorker.prototype;
+  }
+  // Monkey-patch SharedWorker
+  if (window.SharedWorker) {
+    var OriginalSharedWorker = window.SharedWorker;
+    window.SharedWorker = function(url, opts) {
+      if (typeof url === 'string') url = rewriteUrl(url);
+      if (opts !== undefined) return new OriginalSharedWorker(url, opts);
+      return new OriginalSharedWorker(url);
+    };
+    window.SharedWorker.prototype = OriginalSharedWorker.prototype;
+  }
+  // Intercept dynamic import() via import map injection
+  // Since import() cannot be directly monkey-patched, we inject an importmap
+  // that remaps the origin to the proxy for module specifiers.
+  try {
+    var existingMap = document.querySelector('script[type="importmap"]');
+    if (!existingMap) {
+      var mapScript = document.createElement('script');
+      mapScript.type = 'importmap';
+      mapScript.textContent = JSON.stringify({
+        imports: {
+          ['https://' + ORIGIN + '/']: 'https://' + PROXY + '/'
+        },
+        scopes: {}
+      });
+      // importmap must be added before any module scripts
+      var firstScript = document.querySelector('script');
+      if (firstScript) {
+        firstScript.parentNode.insertBefore(mapScript, firstScript);
+      }
+    }
+  } catch(e) {}
+  // Monkey-patch CSSStyleSheet.insertRule to rewrite @import url() references
+  try {
+    var origInsertRule = CSSStyleSheet.prototype.insertRule;
+    CSSStyleSheet.prototype.insertRule = function(rule, index) {
+      if (typeof rule === 'string' && rule.indexOf(ORIGIN) !== -1) {
+        rule = rule.replace(ORIGIN_RE, 'https://' + PROXY);
+      }
+      return origInsertRule.call(this, rule, index);
+    };
+  } catch(e) {}
+  // Patch dynamic <link rel="stylesheet"> href to rewrite origin URLs
+  try {
+    var linkHrefDesc = Object.getOwnPropertyDescriptor(HTMLLinkElement.prototype, 'href');
+    if (linkHrefDesc && linkHrefDesc.set) {
+      Object.defineProperty(HTMLLinkElement.prototype, 'href', {
+        set: function(v) { linkHrefDesc.set.call(this, rewriteUrl(v)); },
+        get: function() { return linkHrefDesc.get.call(this); },
+        configurable: true
+      });
+    }
+  } catch(e) {}
+  })();
+</script>
+<script>
+(function(){
+  try {
+    if (window.__analytics_param_sync) return;
+    window.__analytics_param_sync = true;
+    var TRACKING_PARAMS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
+      'fbclid','gclid','dclid','gbraid','wbraid','msclkid','ttclid'];
+    var STORAGE_KEY = '__um_ss';
+    var SLUG = 'vivabmsemprecom-m1fluy';
+    var CHECKOUT_DOMAINS = ["hotmart.com","pay.hotmart.com","kiwify.com.br","pay.kiwify.com.br","eduzz.com","checkout.eduzz.com","sun.eduzz.com","monetizze.com.br","app.monetizze.com.br","perfectpay.com.br","pay.perfectpay.com.br","braip.com","yampi.com.br","checkout.yampi.com.br","app.yampi.com.br","shopify.com","lastlink.com","pay.lastlink.com","payt.com.br","cartpanda.com","checkout.cartpanda.com","pepper.com.br","greenn.com.br","hubla.com.br","pay.hubla.com","hub.la","doppus.com","guru.com.br","digitalmanager.guru","pagar.me","beta.checkout.pagar.me","kirvano.com","ticto.com.br","checkout.stripe.com","buy.stripe.com"];
+    // 1. Capture UTMs from current URL
+    function getUrlUtms() {
+      var params = {};
+      try {
+        var sp = new URLSearchParams(window.location.search);
+        for (var i = 0; i < TRACKING_PARAMS.length; i++) {
+          var k = TRACKING_PARAMS[i];
+          if (sp.has(k)) params[k] = sp.get(k);
+        }
+      } catch(_){}
+      return params;
+    }
+    // 2. Load from sessionStorage
+    function loadStored() {
+      try {
+        var raw = sessionStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch(_){ return {}; }
+    }
+    // 3. Save to sessionStorage
+    function saveStored(params) {
+      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params)); } catch(_){}
+    }
+    // 4. Merge: URL params override stored
+    var stored = loadStored();
+    var fromUrl = getUrlUtms();
+    var merged = {};
+    for (var key in stored) { if (stored.hasOwnProperty(key)) merged[key] = stored[key]; }
+    for (var key in fromUrl) { if (fromUrl.hasOwnProperty(key)) merged[key] = fromUrl[key]; }
+    saveStored(merged);
+    // Expose merged UTMs globally so the checkout interceptor can access them
+    window.__um_merged = merged;
+    // Check if there are params to propagate
+    var hasParams = false;
+    for (var k in merged) { if (merged.hasOwnProperty(k)) { hasParams = true; break; } }
+    if (!hasParams) return;
+    // 5. Determine if a link should receive UTMs
+    var CHECKOUT_SUBDOMAIN_PREFIXES = ["pay.","checkout.","seguro.","secure.","payment.","pagar.","pagamento.","comprar.","order.","pedido.","carrinho.","cart.","compra.","comprasegura."];
+    function isCheckoutDomain(hostname) {
+      var h = hostname.toLowerCase();
+      for (var i = 0; i < CHECKOUT_DOMAINS.length; i++) {
+        if (h === CHECKOUT_DOMAINS[i] || h.endsWith('.' + CHECKOUT_DOMAINS[i])) return true;
+      }
+      // Check subdomain patterns (pay.*, checkout.*, etc.)
+      for (var j = 0; j < CHECKOUT_SUBDOMAIN_PREFIXES.length; j++) {
+        if (h.indexOf(CHECKOUT_SUBDOMAIN_PREFIXES[j]) !== -1) return true;
+      }
+      return false;
+    }
+    function isInternalLink(href) {
+      try {
+        var u = new URL(href, window.location.href);
+        // Same hostname
+        if (u.hostname === window.location.hostname) return true;
+        // Relative links (already resolved by URL constructor)
+        return false;
+      } catch(_){ return false; }
+    }
+    function shouldPropagate(anchor) {
+      var href = anchor.getAttribute('href');
+      if (!href) return false;
+      var h = href.trim();
+      if (!h || h === '#') return false;
+      if (/^(javascript:|mailto:|tel:)/i.test(h)) return false;
+      try {
+        var u = new URL(h, window.location.href);
+        if (isInternalLink(h)) return true;
+        if (isCheckoutDomain(u.hostname)) return true;
+      } catch(_){}
+      return false;
+    }
+    // 6. Append UTMs to a single anchor
+    function propagateToLink(anchor) {
+      var href = anchor.getAttribute('href');
+      if (!href) return;
+      try {
+        var u = new URL(href, window.location.href);
+        var changed = false;
+        for (var k in merged) {
+          if (merged.hasOwnProperty(k) && !u.searchParams.has(k)) {
+            u.searchParams.set(k, merged[k]);
+            changed = true;
+          }
+        }
+        if (changed) {
+          // For relative links, keep them relative
+          if (href.startsWith('./') || href.startsWith('../') || (href.startsWith('/') && !href.startsWith('//'))) {
+            anchor.setAttribute('href', u.pathname + u.search + u.hash);
+          } else {
+            anchor.setAttribute('href', u.toString());
+          }
+        }
+      } catch(_){}
+    }
+    // 7. Process all links on page
+    function processAllLinks() {
+      var links = document.querySelectorAll('a[href]');
+      for (var i = 0; i < links.length; i++) {
+        if (shouldPropagate(links[i])) propagateToLink(links[i]);
+      }
+    }
+    // Run on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', processAllLinks);
+    } else {
+      processAllLinks();
+    }
+    // 8. MutationObserver for dynamically added links
+    if (typeof MutationObserver !== 'undefined') {
+      var observer = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var added = mutations[i].addedNodes;
+          for (var j = 0; j < added.length; j++) {
+            var node = added[j];
+            if (node.nodeType !== 1) continue;
+            if (node.tagName === 'A' && shouldPropagate(node)) {
+              propagateToLink(node);
+            }
+            if (node.querySelectorAll) {
+              var innerLinks = node.querySelectorAll('a[href]');
+              for (var l = 0; l < innerLinks.length; l++) {
+                if (shouldPropagate(innerLinks[l])) propagateToLink(innerLinks[l]);
+              }
+            }
+          }
+        }
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+  } catch(_){}
+})();
+</script>
+<script>
+(function(){
+var SESSION_ID = "cb2feee4-8928-43af-9950-02455368d718";
+if(!window.__um_ck){window.__um_ck=1;
+var __um_ck_u="https://hwlevhfqsmyssdpktyhl.supabase.co/functions/v1/log-click";
+var __um_ck_o="9bdfae0b-25cd-48b6-bea3-24bc175d124d";
+var __um_ck_s=SESSION_ID;
+var __um_ck_t=0;
+document.addEventListener('click',function(ev){try{
+var now=Date.now();if(now-__um_ck_t<600)return;
+var n=ev.target,el=null,i=0;
+while(n&&n.nodeType===1&&i<6){var tg=(n.tagName||'').toLowerCase();
+if(tg==='a'&&n.getAttribute('href')){el=n;break;}
+if(tg==='button'||tg==='input'&&(n.type==='submit'||n.type==='button')){el=n;break;}
+if(n.getAttribute&&(n.getAttribute('role')==='button'||n.getAttribute('onclick')!==null)){el=n;break;}
+n=n.parentElement;i++;}
+if(!el)return;
+var href='';
+if((el.tagName||'').toLowerCase()==='a'){href=el.getAttribute('href')||'';
+if(!href||href.charAt(0)==='#'||href.slice(0,11).toLowerCase()==='javascript:')return;}
+__um_ck_t=now;
+var lb=(el.innerText||el.value||'').replace(/\s+/g,' ').trim().slice(0,120);
+var sid=(typeof __um_ck_s==='string'&&__um_ck_s.length===36)?__um_ck_s:null;
+var pl=JSON.stringify({offer_id:__um_ck_o,session_id:sid,href:href.slice(0,500),label:lb,page_path:location.pathname.slice(0,500),domain:location.hostname});
+if(navigator.sendBeacon){navigator.sendBeacon(__um_ck_u,new Blob([pl],{type:'text/plain;charset=UTF-8'}));}
+else{fetch(__um_ck_u,{method:'POST',body:pl,keepalive:true}).catch(function(){});}
+}catch(_){}} ,true);
+}
+})();
+</script>
+<script>(function(){try{var p=window.parent;if(p===window)return;function r(){p.postMessage({t:'sys-nav',u:location.href},'*')}r();window.addEventListener('popstate',r);var _ps=history.pushState;history.pushState=function(){_ps.apply(this,arguments);r()};var _rs=history.replaceState;history.replaceState=function(){_rs.apply(this,arguments);r()}}catch(e){}})()</script>
+<script id="quiz-translation-en-us">
+(function () {
+  'use strict';
+  var exact = {
+    'Protocolo Limpa Dor': 'Pain Relief Protocol',
+    'URGENTE:': 'URGENT:',
+    'Médico Ensina Receita Caseira': 'Doctor Reveals a Homemade Recipe',
+    'que Elimina as Dores do Corpo em 24 horas': 'That Eliminates Body Pain in 24 Hours',
+    'e Restaura as Articulações em 9 dias, Eliminando a': 'and Restores Your Joints in 9 Days, Eliminating',
+    'Inflamação Causada por Parasitas!': 'Parasite-Caused Inflammation!',
+    'Dores no corpo não são “coisa da idade”. Médico desmente as farmácias e ensina uma receita simples que elimina as dores em 24 horas e está fazendo pessoas com mais de 60 anos voltarem a correr, agachar, subir escadas e dormir melhor em apenas 9 dias.': 'Body pain isn’t “just part of getting older.” A doctor calls out the pharmacies and shares a simple recipe that eliminates pain in 24 hours—and is helping people over 60 get back to running, squatting, climbing stairs, and sleeping better in just 9 days.',
+    'Teste de Parasitas': 'Parasite Test',
+    'Resultado Instantâneo': 'Instant Results',
+    'Receita Completa': 'Complete Recipe',
+    'Enviamos no Seu WhatsApp': 'Sent to Your WhatsApp',
+    'QUERO APRENDER TAMBÉM !': 'I WANT TO LEARN TOO!',
+    'Sinto mais de 1 😓': 'I have more than one 😓',
+    'Sinto 2 ou mais 😬': 'I have two or more 😬',
+    'Não, eu nunca desparasitei.': 'No, I’ve never done a parasite cleanse.',
+    'Sim, eu já desparasitei.': 'Yes, I’ve done a parasite cleanse.',
+    'Você já Desparasitou de alguma maneira?': 'Have you ever done a parasite cleanse?',
+    'Você já': 'Have you ever',
+    ' Desparasitou ': ' done a parasite cleanse ',
+    'de alguma maneira?': '?',
+    'Utilizando remédios ou formas naturais.': 'Using medication or natural methods.',
+    '😐\n\nNão, eu nunca desparasitei.': '😐\n\nNo, I’ve never done a parasite cleanse.',
+    '😁\n\nSim, eu já desparasitei.': '😁\n\nYes, I’ve done a parasite cleanse.',
+    'Você já fez alguma consulta médica relacionada ás suas dores?': 'Have you ever seen a doctor about your pain?',
+    'Pode ser qualquer tipo de consulta profissional.': 'This can be any kind of professional consultation.',
+    'Sim, já fiz várias': 'Yes, several times',
+    'Sim, mas poucas vezes': 'Yes, a few times',
+    'Nunca procurei ninguém': 'I’ve never sought help',
+    'Há quanto tempo você sente essas dores?': 'How long have you been dealing with this pain?',
+    'Por favor, responda com atenção — essa informação é essencial para a nossa análise.': 'Please answer carefully—this information is essential to our analysis.',
+    'Sinto dores há menos de 3 meses...': 'I’ve had pain for less than 3 months...',
+    'Sofro com isso há 6 meses': 'I’ve been suffering from this for 6 months.',
+    'Convivo com essa tortura há mais de 1 ano': 'I’ve been living with this torture for over a year.',
+    'Estou sofrendo há décadas com essa enfermidade': 'I’ve been suffering from this condition for decades.',
+    'O quanto essas dores atrapalham sua vida todos os dias?': 'How much do these pains interfere with your daily life?',
+    'Essa informação é essencial para uma análise mais precisa da sua condição.': 'This information is essential for a more accurate analysis of your condition.',
+    'Pouco, consigo dormir tranquilo e me agachar sem medo, apenas sinto pequenas pontadas.': 'A little. I can sleep soundly and squat without fear; I just feel occasional twinges.',
+    'Mais ou menos, sinto que meu corpo está começando a travar, alguns movimentos comuns começaram a virar desafios diários': 'Moderately. I feel my body starting to stiffen up, and everyday movements have become daily challenges.',
+    'Muito, tenho medo de subir as escadas, as dores fazem parte da minha rotina, perdi a liberdade do meu corpo.': 'A lot. I’m afraid to climb the stairs. Pain is part of my daily routine, and I’ve lost my freedom of movement.',
+    'Demais, todos os dias é uma tortura constante, não aguento mais!': 'Extremely. Every day is constant torture. I can’t take it anymore!',
+    'Você tem alguma dessas condições?': 'Do you have any of these conditions?',
+    'Elas podem influenciar diretamente o crescimento da suas dores.': 'They may directly contribute to your pain getting worse.',
+    'Para uma orientação mais precisa, responda à pergunta abaixo, selecione uma ou mais:': 'For more accurate guidance, answer the question below. Select one or more:',
+    'Artrose': 'Osteoarthritis',
+    'Artrite': 'Arthritis',
+    'Tendinites ou bursites': 'Tendinitis or bursitis',
+    'Lombalgia Mecânica': 'Mechanical low back pain',
+    'Cervicalgia Mecânica ou Bico de papagaio': 'Mechanical neck pain or bone spurs',
+    'Fascite Plantar ou Esporão de Calcâneo': 'Plantar fasciitis or heel spurs',
+    'Nenhuma das opções': 'None of the above',
+    'Continuar': 'Continue',
+    'Se você nunca fez uma Desparasitação Natural, cuidado: os vermes podem se multiplicar no seu corpo e alcançar órgãos vitais como cérebro, coração e pulmões. Não ignore esse risco, é essencial desparasitar pelo menos uma vez ao ano!': 'If you’ve never done a natural parasite cleanse, be careful: worms can multiply in your body and reach vital organs like your brain, heart, and lungs. Don’t ignore this risk—it’s essential to do a parasite cleanse at least once a year!',
+    'Veja essa Notícia do G1 👇': 'See this news story 👇',
+    'Você tem ciência que a falta de cuidados com esse assunto pode piorar suas dores e deixar sequelas que podem ser irreversíveis?': 'Are you aware that neglecting this issue could make your pain worse and leave you with effects that may be irreversible?',
+    'Por favor, seja sincero.': 'Please be honest.',
+    '😔 Sim, eu sei da gravidade que é ter parasitas habitando o meu intestino': '😔 Yes, I know how serious it is to have parasites living in my intestines.',
+    '😰 Não sabia da gravidade, mais quero cuidar.': '😰 I didn’t know it was that serious, but I want to take care of it.',
+    'Você concorda comigo que na maioria das vezes a falta de atividade física e a má alimentação não é nossa culpa, somos taxados como desequilibrados mas isso se deve as nossas articulações estarem inflamadas por conta dos parasitas?': 'Do you agree that, most of the time, lack of physical activity and poor eating habits aren’t our fault? We’re labeled as out of balance, but it’s because parasites have inflamed our joints.',
+    'Por favor, seja sincera, quero ajudar!': 'Please be honest. I want to help!',
+    'Eu concordo sim!': 'I agree!',
+    'Concordo em partes.': 'I partly agree.',
+    'Você comeu algum desses alimentos nos ultimos 3 meses?': 'Have you eaten any of these foods in the last 3 months?',
+    'Responda com atenção estamos avaliando cada resposta.': 'Please answer carefully—we’re evaluating every answer.',
+    'Leite': 'Milk',
+    'Queijo': 'Cheese',
+    'Batata Frita': 'French fries',
+    'salsicha': 'Sausage',
+    'presunto': 'Ham',
+    'Álcool': 'Alcohol',
+    'Dentro dos sintomas listados abaixo, quais mais te incomodam?': 'Which of the symptoms below bother you the most?',
+    'Selecione um ou mais.': 'Select one or more.',
+    'Dor constante': 'Constant pain',
+    'Rigidez': 'Stiffness',
+    'Inchaço': 'Swelling',
+    'Estalos ou crepitação': 'Popping or grinding sounds',
+    'Travamento': 'Locking',
+    'Calor ou vermelhidão': 'Warmth or redness',
+    'Perda de mobilidade': 'Loss of mobility',
+    'Fraqueza muscular': 'Muscle weakness',
+    'Fadiga e cansaço': 'Fatigue and low energy',
+    'Esses sintomas atrapalham sua vida?': 'Do these symptoms interfere with your life?',
+    'Seja sincero(a) na resposta.': 'Be honest in your answer.',
+    '😓 Sim, me impedem de fazer coisas simples como caminhar ou dormir bem.': '😓 Yes, they keep me from doing simple things like walking or sleeping well.',
+    '😕 Atrapalham um pouco, mas ainda consigo levar a vida.': '😕 They interfere a little, but I can still manage my life.',
+    '💔 Estão acabando com minha qualidade de vida, tenho medo de virar um fardo para os outros.': '💔 They’re ruining my quality of life. I’m afraid of becoming a burden to others.',
+    'Antes eu fazia tudo em casa, agora preciso de ajuda, cada vez perco mais minha mobilidade.': 'I used to do everything around the house. Now I need help, and I’m losing more of my mobility every day.',
+    'Qual período as dores mais te incomodam?': 'When do the pains bother you the most?',
+    'Na manhã, tenho dificuldade em levantar da cama, e sinto muitas dores ao acordar.': 'In the morning. I have trouble getting out of bed, and I wake up in a lot of pain.',
+    'Na Tarde, durante o dia sinto muitas dores, tenho dificuldade em fazer muitas atividades do dia dia.': 'In the afternoon. I’m in a lot of pain during the day and have trouble doing many everyday activities.',
+    'Na Noite, tenho dificuldade em dormir e encontrar uma posição confortável ao deitar.': 'At night. I have trouble sleeping and finding a comfortable position when I lie down.',
+    'O quanto essas dores realmente te afetam emocionalmente?': 'How much do these pains really affect you emotionally?',
+    '😞 Me deixam triste e sem energia até para conviver com minha família': '😞 They make me sad and leave me with no energy—even to spend time with my family.',
+    '😡 Me deixam irritado(a), sinto que nada dá certo, estou me sentindo cada vez menos útil.': '😡 They make me irritable. I feel like nothing is going right, and I’m feeling less and less useful.',
+    '😔 Me fazem perder a vontade de sair de casa e aproveitar a vida': '😔 They make me lose the desire to leave home and enjoy life.',
+    '🌙 Afetam até meu sono, acordo cansado(a) todos os dias': '🌙 They even affect my sleep. I wake up tired every day.',
+    '⚠️ Os Resultados Não Mentem:': '⚠️ The Results Don’t Lie:',
+    'Seus Sintomas estão indicando Algo Muito Perigoso – Ouça Com Atenção!': 'Your symptoms are pointing to something very dangerous—listen carefully!',
+    'Escute essa rápida explicação 👇': 'Listen to this quick explanation 👇',
+    'Caso o áudio não inicie, basta clicar nele!': 'If the audio doesn’t start, just click it!',
+    'Veja só esse caso': 'See this case',
+    '1 semana após iniciar a desparasitação': 'One week after starting the parasite cleanse',
+    'Muito obrigada Rodrigo, ja to desparasitando a 8 dias, e minhas dores simplesmente sumiram, to muito feliz por essa vitoria em minha vida😭😭😭😭 obrigada vc foi um anjo.': 'Thank you so much, Rodrigo. I’ve been doing the parasite cleanse for 8 days now, and my pain has simply disappeared. I’m so happy about this victory in my life 😭😭😭😭 Thank you—you were an angel.',
+    'Você teria interesse em receber um protocolo personalizado para Desparasitação em 9 dias?': 'Would you be interested in receiving a personalized 9-day parasite cleanse protocol?',
+    '✅ Sim, Eu quero demais!': '✅ Yes, I really want it!',
+    '😃Tenho interesse, mas quero tirar dúvidas.': '😃 I’m interested, but I have some questions.',
+    'Quais tipos de tratamento ou medicamentos você já usou para aliviar as dores?': 'What kinds of treatments or medications have you used to relieve your pain?',
+    '(Selecione todos que já testou)': '(Select all that you’ve tried.)',
+    '💊 Analgésicos (ex: Tramal, codeína, dipirona)': '💊 Pain relievers (e.g., tramadol, codeine, acetaminophen)',
+    '💢 Anti-inflamatórios (ex: Ibuprofeno, Diclofenaco, Nimesulida)': '💢 Anti-inflammatory medications (e.g., ibuprofen, diclofenac, naproxen)',
+    '😴 Relaxantes musculares (ex: Dorflex, Mioflex, Torsilax)': '😴 Muscle relaxers (e.g., cyclobenzaprine, methocarbamol)',
+    '🌿 Suplementos naturais': '🌿 Natural supplements',
+    '💉 Injeções para Dores': '💉 Pain-relief injections',
+    '🚫 Nunca usei nenhum tratamento para dor': '🚫 I’ve never used any treatment for pain',
+    'Nunca usei nenhum tratamento para dor': 'I’ve never used any treatment for pain',
+    'Você já tentou alguma dessas soluções alternativas para aliviar a dor mas': 'Have you tried any of these alternative solutions to relieve your pain, but',
+    'sem sucesso duradouro?': 'without lasting success?',
+    '🙏 Fiz acupuntura, quiropraxia ou massagens, mas as dores voltaram.': '🙏 I tried acupuncture, chiropractic care, or massages, but the pain came back.',
+    '🧘‍♀️ Já fiz fisioterapia, alongamentos e exercícios, mas a dor sempre volta depois de alguns dias.': '🧘‍♀️ I’ve tried physical therapy, stretching, and exercise, but the pain always comes back after a few days.',
+    '🌿 Tentei chás, ervas ou remédios naturais, senti melhora no início, mas não foi o suficiente.': '🌿 I tried teas, herbs, or natural remedies. I felt better at first, but it wasn’t enough.',
+    '🩹 Usei pomadas, cremes e até suplementos, mas nada resolveu de verdade.': '🩹 I used ointments, creams, and even supplements, but nothing really worked.',
+    '🦵 Já usei joelheiras, órteses ou bengalas ajudou um pouco, mas não tratou a causa.': '🦵 I’ve used knee braces, orthotics, or canes. They helped a little, but didn’t treat the cause.',
+    '💸 Já gastei tempo e dinheiro com várias dessas opções, sem resultado duradouro.': '💸 I’ve spent time and money on several of these options, but nothing has lasted.',
+    '🔍 Ainda não testei muitas coisas — estou em busca de algo que realmente funcione e resolva de vez.': '🔍 I haven’t tried many things yet—I’m looking for something that really works and fixes the problem for good.',
+    'Você concorda comigo que a nossa saúde é o nosso bem mais importante?': 'Do you agree that our health is our most important asset?',
+    'sem ela não somos nada.': 'Without it, we’re nothing.',
+    '✅ Concordo!': '✅ I agree!',
+    '😕 Não concordo.': '😕 I don’t agree.',
+    'O QUE VOCÊ FARIA SE, NESTE EXATO MOMENTO, SUAS DORES CRÔNICAS SUMISSEM E SUA VIDA VOLTASSE AO NORMAL?': 'WHAT WOULD YOU DO IF YOUR CHRONIC PAIN DISAPPEARED RIGHT NOW AND YOUR LIFE WENT BACK TO NORMAL?',
+    'Agora, é hora de sentir a liberdade. Mentalize esse momento e selecione entre as opções abaixo:': 'Now it’s time to feel free. Picture that moment and choose one of the options below:',
+    '🥳 Choraria de felicidade, sem conseguir acreditar que a dor se foi para sempre!': '🥳 I’d cry tears of joy, unable to believe the pain was gone for good!',
+    '😌 Sentiria um alívio imenso, como se um sonho impossível tivesse se realizado, e começaria a planejar tudo o que a dor me impedia de fazer!': '😌 I’d feel immense relief, as if an impossible dream had come true, and start planning everything the pain kept me from doing!',
+    '💪 Sentiria uma energia renovada e a certeza de que a culpa não era minha, mas dos invasores, e que agora sou livre para viver!': '💪 I’d feel renewed energy and know it wasn’t my fault—it was the invaders—and that now I’m free to live!',
+    '💃 Iria comemorar cada movimento sem dor, cada passo leve, cada noite de sono profundo e reparador!': '💃 I’d celebrate every pain-free movement, every easy step, and every night of deep, restorative sleep!',
+    '😄 Ficaria com medo... será que é real mesmo? Mas logo viria a alegria de saber que é verdade!': '😄 I’d be afraid... Is this really real? But then I’d feel happy knowing it was true!',
+    'Você se compromete em seguir nosso Protocolo de 9 Dias em Casa?': 'Will you commit to following our 9-Day At-Home Protocol?',
+    'vou te ajudar em tudo o que precisar.': 'I’ll help you with everything you need.',
+    '😍 Sim eu me Comprometo!': '😍 Yes, I’m committed!',
+    '😀Eu vou Tentar!': '😀 I’ll give it a try!',
+    'Qual seria a melhor parte de se livrar das dores articulares?': 'What would be the best part of getting rid of joint pain?',
+    'Poder andar e se movimentar sem medo': 'Being able to walk and move without fear',
+    'Dormir bem e acordar descansado(a)': 'Sleeping well and waking up refreshed',
+    'Brincar e estar ativo(a) com a família': 'Playing and staying active with my family',
+    'Voltar a ter liberdade no corpo': 'Getting my freedom of movement back',
+    'Não depender mais de ninguém para nada': 'Not having to depend on anyone for anything',
+    'Escute o áudio abaixo: 👇': 'Listen to the audio below 👇',
+    'Caso o AUDIO não inicie, basta clicar nele!': 'If the audio doesn’t start, just click it!',
+    'Gerar Protocolo Personalizado! ✅': 'Generate My Personalized Protocol! ✅',
+    'Estou analisando as suas respostas e gerando o': 'I’m analyzing your answers and generating your',
+    'seu protocolo personalizado.': 'personalized protocol.',
+    'Montando protocolo personalizado': 'Building your personalized protocol',
+    'Estamos analisando suas respostas': 'We’re analyzing your answers',
+    'Abaixo está a análise da sua situação atual, baseada nas suas respostas.👇': 'Here’s an analysis of your current situation, based on your answers. 👇',
+    'Chances de possuir parasitas inflamatórias': 'Chance of having inflammation-causing parasites',
+    'Chances das dores piorarem nos próximos meses': 'Chance your pain will get worse in the next few months',
+    'Chances de perder a liberdade de se mover': 'Chance of losing your freedom of movement',
+    'Chances de aparecer outra dor em outra região do corpo': 'Chance of developing pain in another area of your body',
+    'Chances de se livrar das dores sem a desparasitação': 'Chance of getting rid of the pain without a parasite cleanse',
+    'Chances de acabar com todas as dores no corpo com a desparasitação': 'Chance of getting rid of all your body pain with a parasite cleanse',
+    'Chances de eliminar parasita em 2 dias': 'Chance of eliminating the parasite in 2 days',
+    'Chances de eliminar parasitas por completo': 'Chance of eliminating parasites completely',
+    'Possível agente parasitário de acordo com os seus sintomas:': 'Possible parasitic agent based on your symptoms:',
+    '⚠️ Atenção !': '⚠️ Attention!',
+    'No nosso Protocolo, você pode ficar tranquilo! Nenhum verme ou parasita sairá vivo de forma incômoda. Eles são eliminados já mortos e desmanchados, quase imperceptíveis. ☺️': 'With our Protocol, you can rest easy! No worm or parasite will come out alive in an uncomfortable way. They’re eliminated already dead and broken down, almost imperceptible. ☺️',
+    'A Desparasitação ocorrerá primeiramente através de uma batida de gengibre com um ingrediente secreto facilmente encontrado nos mercados e pouco utilizado.': 'The parasite cleanse will start with a ginger smoothie made with a secret ingredient that’s easy to find in grocery stores and rarely used.',
+    'Gerar Protocolo de Tratamento! ✅': 'Generate Treatment Protocol! ✅',
+    'Imagem': 'Image'
+  };
+  function normalize(s) { return s.replace(/\s+/g, ' ').trim(); }
+  function translateRich(el) {
+    if (!el || !el.matches || !el.matches('h1,h2,h3,h4,h5,h6,p,button')) return;
+    if (el.closest('script,style,noscript')) return;
+    var target = exact[normalize(el.textContent || '')];
+    if (target === undefined || normalize(el.textContent || '') === normalize(target)) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var nodes = [], node;
+    while ((node = walker.nextNode())) if (node.nodeValue.trim()) nodes.push(node);
+    if (nodes.length < 2) return;
+    var weights = nodes.map(function(n) { return normalize(n.nodeValue).length || 1; });
+    var total = weights.reduce(function(a,b) { return a+b; }, 0);
+    var buckets = nodes.map(function() { return ''; });
+    var pieces = target.match(/\S+\s*/g) || [target];
+    var position = 0;
+    pieces.forEach(function(piece) {
+      var center = (position + piece.length / 2) / Math.max(1, target.length) * total;
+      var sum = 0, index = weights.length - 1;
+      for (var i = 0; i < weights.length; i++) { sum += weights[i]; if (center <= sum) { index = i; break; } }
+      buckets[index] += piece;
+      position += piece.length;
+    });
+    nodes.forEach(function(n, i) {
+      var lead = i === 0 ? (n.nodeValue.match(/^\s*/)[0] || '') : '';
+      var tail = i === nodes.length - 1 ? (n.nodeValue.match(/\s*$/)[0] || '') : '';
+      n.nodeValue = lead + buckets[i] + tail;
+    });
+  }
+  function translateText(node) {
+    if (node.parentElement && node.parentElement.closest('script,style,noscript')) return;
+    var original = node.nodeValue;
+    if (!original || !original.trim()) return;
+    var key = normalize(original);
+    var translated = exact[key];
+    if (translated !== undefined) {
+      var lead = original.match(/^\s*/)[0];
+      var tail = original.match(/\s*$/)[0];
+      node.nodeValue = lead + translated + tail;
+      return;
+    }
+    var next = original;
+    Object.keys(exact).sort(function(a,b){return b.length-a.length;}).forEach(function(source) {
+      if (source.indexOf('\n') !== -1) return;
+      if (next.indexOf(source) !== -1) next = next.split(source).join(exact[source]);
+    });
+    if (next !== original) node.nodeValue = next;
+  }
+  function scan(root) {
+    if (!root) return;
+    if (root.nodeType === 3) { translateText(root); return; }
+    if (root.matches) translateRich(root);
+    if (root.querySelectorAll) root.querySelectorAll('h1,h2,h3,h4,h5,h6,p,button').forEach(translateRich);
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) translateText(node);
+    if (root.querySelectorAll) {
+      root.querySelectorAll('[alt],[title],[aria-label],[placeholder]').forEach(function(el) {
+        ['alt','title','aria-label','placeholder'].forEach(function(attr) {
+          var value = el.getAttribute(attr);
+          if (value && exact[normalize(value)]) el.setAttribute(attr, exact[normalize(value)]);
+        });
+      });
+    }
+  }
+  function setLocaleMetadata() {
+    if (!document.documentElement) return;
+    document.documentElement.lang = 'en-US';
+    var lang = document.querySelector('meta[http-equiv="content-language"]');
+    if (lang) lang.setAttribute('content', 'en-US');
+    var locale = document.querySelector('meta[property="og:locale"]');
+    if (locale) locale.setAttribute('content', 'en_US');
+    ['og:title','og:site_name','og:image:alt'].forEach(function(prop) {
+      var m = document.querySelector('meta[property="' + prop + '"]');
+      if (m && exact[normalize(m.content)]) m.content = exact[normalize(m.content)];
+    });
+    var item = document.querySelector('meta[itemprop="name"]');
+    if (item && exact[normalize(item.content)]) item.content = exact[normalize(item.content)];
+    if (document.title && exact[normalize(document.title)]) document.title = exact[normalize(document.title)];
+  }
+  scan(document.documentElement);
+  var observer = new MutationObserver(function(records) {
+    records.forEach(function(record) {
+      if (record.type === 'characterData') translateText(record.target);
+      else record.addedNodes.forEach(scan);
+    });
+    setLocaleMetadata();
+  });
+  if (document.documentElement) observer.observe(document.documentElement, {subtree:true, childList:true, characterData:true});
+  setLocaleMetadata();
+  window.setInterval(function () { scan(document.body); setLocaleMetadata(); }, 400);
+})();
+
+</script>

@@ -1,7 +1,19 @@
-<!DOCTYPE html><html lang="pt-br" class="scroll-smooth" data-scroll-behavior="smooth"><head><script id="network-guard">(function(){
+<!DOCTYPE html><html lang="pt-br" class="scroll-smooth" data-scroll-behavior="smooth"><head><script id="vsl-player-swap">(function(){
+  // Troca a VSL da etapa "Mini VSL 1 Consultorio" pelo player novo da ConverteAI.
+  var OLD_ACC='e62fa58b-699e-4682-a0da-525c80705dfc', OLD_ID='6a978d7a09f223ec4ae87d0e', OLD_PAD='177.77777777777777%';
+  var NEW_ACC='c6861804-19a7-4dff-a0f4-8a76179ea4ee', NEW_ID='6adfee2a3b1e2d41ab410ad7', NEW_PAD='178.33333333333334%';
+  var jp=JSON.parse;
+  JSON.parse=function(t){
+    if(typeof t==='string' && t.indexOf(OLD_ID)!==-1){
+      t=t.split(OLD_ACC).join(NEW_ACC).split(OLD_ID).join(NEW_ID).split(OLD_PAD).join(NEW_PAD);
+      arguments[0]=t;
+    }
+    return jp.apply(this,arguments);
+  };
+})();</script><script id="network-guard">(function(){
   'use strict';
-  // Bloqueia envio de dados para servicos de terceiros (Inlead, Arktrix, Supabase, UTMify, Cloudflare, VTurb).
-  var BLOCK = /(^|\.)(arktrix\.app|arktrix\.com|supabase\.co|utmify\.com\.br|cloudflareinsights\.com|vturb\.com|vturb\.com\.br|converteai\.net|api\.inlead\.tech|api\.analysis\.inlead\.tech|api\.sidecar\.inlead\.tech|api\.ai\.inlead\.tech|api\.content\.inlead\.tech)$/i;
+  // Bloqueia envio de dados para servicos de terceiros (Inlead, Arktrix, Supabase, UTMify, Cloudflare). VTurb/ConverteAI liberado para a VSL.
+  var BLOCK = /(^|\.)(arktrix\.app|arktrix\.com|supabase\.co|utmify\.com\.br|cloudflareinsights\.com|api\.inlead\.tech|api\.analysis\.inlead\.tech|api\.sidecar\.inlead\.tech|api\.ai\.inlead\.tech|api\.content\.inlead\.tech)$/i;
   function blocked(u){ try { return BLOCK.test(new URL(String(u), location.href).hostname); } catch(_) { return false; } }
   // limpa parametros de editor que tenham vindo na URL
   try { var url = new URL(location.href), mud = false;
